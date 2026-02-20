@@ -1,14 +1,31 @@
 package com.example.cards;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cards.db.AccesoPlantas;
+import com.example.cards.db.MongoUtil;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+import org.bson.Document;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
+    List<Planta> plantas;
+    PlantaAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +38,10 @@ public class MainActivity extends AppCompatActivity {
         // Definir que la lista sea lineal (vertical)
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Crear los datos
-        List<Planta> plantas = crearDatos();
+        plantas = new ArrayList<>();
 
         // Crear y asignar el adaptador
-        PlantaAdapter adapter = new PlantaAdapter(plantas, new PlantaAdapter.OnItemClickListener() {
+        adapter = new PlantaAdapter(plantas, new PlantaAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Planta planta) {
                 // Al hacer clic, abrimos la segunda actividad
@@ -34,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(adapter);
+        cargarDatos();
     }
 
     private void abrirDetalle(Planta planta) {
@@ -43,19 +60,21 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Método auxiliar para generar datos de prueba
-    private List<Planta> crearDatos() {
-        List<Planta> list = new ArrayList<>();
-        list.add(new Planta(1, "Albahaca", "Lamiáceas", "Alto", 40, "Hierba aromática esencial para el pesto.", "India", R.drawable.albahaca));
-        list.add(new Planta(2, "Lavanda", "Lamiáceas", "Bajo", 60, "Famosa por su fragancia y propiedades relajantes.", "Mediterráneo", R.drawable.lavanda));
-        list.add(new Planta(3, "Menta", "Lamiáceas", "Medio", 30, "Planta refrescante de crecimiento muy rápido.", "Europa", R.drawable.menta));
-        list.add(new Planta(4, "Cactus de Asiento", "Cactáceas", "Nulo", 50, "Planta suculenta globosa con espinas amarillas.", "México", R.drawable.cactus));
-        list.add(new Planta(5, "Romero", "Lamiáceas", "Alto", 150, "Arbusto leñoso muy utilizado en guisos y carnes.", "Mediterráneo", R.drawable.romero));
-        list.add(new Planta(6, "Girasol", "Asteráceas", "Medio", 200, "Planta que sigue la ruta del sol durante el día.", "Norteamérica", R.drawable.girasol));
-        list.add(new Planta(7, "Helecho Espada", "Polypodiaceae", "Nulo", 90, "Planta ornamental clásica para interiores sombríos.", "Zonas Tropicales", R.drawable.helecho));
-        list.add(new Planta(8, "Orquídea Phalaenopsis", "Orchidaceae", "Nulo", 45, "Flor elegante conocida como orquídea mariposa.", "Sudeste Asiático", R.drawable.orquidea));
-        list.add(new Planta(9, "Aloe Vera", "Asphodelaceae", "Bajo", 60, "Conocida por las propiedades medicinales de su gel.", "África", R.drawable.aloe));
-        list.add(new Planta(10, "Bambú de la Suerte", "Asparagaceae", "Nulo", 100, "Común en decoración, técnicamente es una Dracaena.", "África Central", R.drawable.bambu));
-        return list;
+    // Método auxiliar para cargar los datos
+    private void cargarDatos() {
+        new Thread(new Runnable() {
+            public void run() {
+                List<Planta> nuevasPlantas = AccesoPlantas.obtenerPlantas();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        plantas.clear();
+                        plantas.addAll(nuevasPlantas);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        }).start();
     }
 }

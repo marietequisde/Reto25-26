@@ -38,7 +38,7 @@ public class Detalle extends AppCompatActivity {
 
             // Mostrar datos
             tvDescripcion.setText(planta.getDescripcion());
-            tvOrigen.setText("Origen: " + planta.getOrigin().toUpperCase());
+            tvOrigen.setText("Origen: " + planta.getOrigen().toUpperCase());
         }
 
         // Configurar el botón para cerrar esta actividad y volver a la lista
