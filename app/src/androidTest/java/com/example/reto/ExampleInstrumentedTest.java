@@ -1,4 +1,4 @@
-package com.example.cards;
+package com.example.reto;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.cards", appContext.getPackageName());
+        assertEquals("com.example.reto", appContext.getPackageName());
     }
 }

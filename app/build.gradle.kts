@@ -3,13 +3,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.cards"
+    namespace = "com.example.reto"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.example.cards"
+        applicationId = "com.example.reto"
         minSdk = 27
         targetSdk = 36
         versionCode = 1

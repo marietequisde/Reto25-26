@@ -1,7 +1,6 @@
-package com.example.cards.db;
+package com.example.reto.db;
 
-import com.example.cards.Planta;
-import com.mongodb.client.FindIterable;
+import com.example.reto.Planta;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 

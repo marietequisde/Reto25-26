@@ -1,4 +1,4 @@
-package com.example.cards.db;
+package com.example.reto.db;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
