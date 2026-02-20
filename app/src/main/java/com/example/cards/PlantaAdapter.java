@@ -1,6 +1,10 @@
 package com.example.cards;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +68,8 @@ public class PlantaAdapter extends RecyclerView.Adapter<PlantaAdapter.PlantaView
                     tvValor.setTextColor(Color.BLACK);
                     break;
             }
-            ivImagen.setImageResource(planta.getIdImagen());
+
+            ivImagen.setImageBitmap(planta.getImagen());
 
             // Configurar el clic en toda la tarjeta
             itemView.setOnClickListener(new View.OnClickListener() {

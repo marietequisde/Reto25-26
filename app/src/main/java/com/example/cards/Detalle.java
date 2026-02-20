@@ -28,8 +28,8 @@ public class Detalle extends AppCompatActivity {
 
         // Verificar que el objeto no sea nulo para evitar errores (NullPointerException)
         if (planta != null) {
-            // Asignar la imagen usando el ID de recurso guardado en el objeto
-            ivImagen.setImageResource(planta.getIdImagen());
+            // Asignar la imagen usando el bitmap
+            ivImagen.setImageBitmap(planta.getImagen());
             tvNombre.setText(planta.getNombre());
 
             // Construir una cadena de texto combinando varios atributos

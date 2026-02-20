@@ -1,5 +1,9 @@
 package com.example.cards;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 import org.bson.Document;
 
 import java.io.Serializable;
@@ -15,18 +19,7 @@ public class Planta implements Serializable {
     private int altura; // En centrimetros
     private String descripcion;
     private String origen;
-    private int idImagen;
-
-    public Planta(int id, String nombre, String familia, String valorCulinario, int altura, String descripcion, String origen, int idImagen) {
-        this.id = id;
-        this.nombre = nombre;
-        this.familia = familia;
-        this.valorCulinario = valorCulinario;
-        this.altura = altura;
-        this.descripcion = descripcion;
-        this.origen = origen;
-        this.idImagen = idImagen;
-    }
+    private String imagen;
 
     public Planta(Document doc) {
         nombre = doc.getString("nombre");
@@ -35,8 +28,17 @@ public class Planta implements Serializable {
         altura = doc.getInteger("altura");
         descripcion = doc.getString("descripcion");
         origen = doc.getString("origen_nombre");
-        // TODO imagen
-        idImagen = R.drawable.ic_launcher_background;
+        imagen = doc.getString("imagen");
+    }
+
+    private static Bitmap decodeBase64(String base64) {
+        if (base64 != null && !base64.isEmpty()) {
+            final String cabecera = "data:image/webp;base64,";
+            final String base64SinCabecera = base64.substring(cabecera.indexOf(","));
+            byte[] bytes = Base64.decode(base64SinCabecera, Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        }
+        return null;
     }
 
     // Getters y Setters
@@ -96,12 +98,12 @@ public class Planta implements Serializable {
         this.origen = origen;
     }
 
-    public int getIdImagen() {
-        return idImagen;
+    public Bitmap getImagen() {
+        return decodeBase64(imagen);
     }
 
-    public void setIdImagen(int idImagen) {
-        this.idImagen = idImagen;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     @Override
@@ -114,7 +116,6 @@ public class Planta implements Serializable {
                 ", altura=" + altura +
                 ", descripcion='" + descripcion + '\'' +
                 ", origen='" + origen + '\'' +
-                ", idImagen=" + idImagen +
                 '}';
     }
 }
