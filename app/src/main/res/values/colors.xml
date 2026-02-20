@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="negro">#FF000000</color>
+    <color name="blanco">#FFFFFFFF</color>
+    <color name="colorPrimario">#6200EE</color>
+    <color name="oscuroPrimario">#3700B3</color>
+    <color name="colorAcentos">#03DAC5</color>
+    <color name="colorFondo">#F5F5F5</color>
+    <color name="fondoTarjeta">#FFFFFF</color>
+    <color name="textColorPrimario">#212121</color>
+    <color name="textColorSecundario">#757575</color>
+    <color name="rojo">#D32F2F</color>
+    <color name="naranja">#F59827</color>
+    <color name="verde">#4CAF50</color>
+</resources>

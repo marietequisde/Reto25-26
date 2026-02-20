@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TituloPlanta">
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="android:textColor">@color/textColorPrimario</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <style name="CuerpoPlanta">
+        <item name="android:textSize">@dimen/text_body</item>
+        <item name="android:textColor">@color/textColorSecundario</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TarjetaPlanta">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="cardBackgroundColor">@color/fondoTarjeta</item>
+        <item name="contentPadding">@dimen/margen_small</item>
+    </style>
+</resources>
